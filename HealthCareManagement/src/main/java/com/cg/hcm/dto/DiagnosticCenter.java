@@ -9,12 +9,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+//mapping  entity class to table in sql.
 @Table(name="center")
+//Assigning the table name
 @SequenceGenerator(name = "cenId",initialValue = 1,allocationSize = 1)
+//Defining a generator
 public class DiagnosticCenter 
 {
 	@Id
 	@Column(name = "center_id")
+	//Generating values of center_id
 	@GeneratedValue(generator = "cenId",strategy = GenerationType.SEQUENCE)
 	private Integer centerId;
 	@Column(name = "center_name")
@@ -29,7 +33,8 @@ public class DiagnosticCenter
 		this.centerName = centerName;
 		this.centerArea = centerArea;
 	}
-
+    
+	//Getters and Setters
 	public Integer getCenterId() {
 		return centerId;
 	}

@@ -17,33 +17,42 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.hcm.dto.TestCenter;
 import com.cg.hcm.service.TestCenterService;
 
-
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TestCenterController 
 {
 	@Autowired
+	//Auto wiring bean on setter method and constructor or a field
 	TestCenterService testCenterService;
 	public void setTestCenterService(TestCenterService testCenterService)
 	{
 		this.testCenterService = testCenterService;
 	}
-	@DeleteMapping("/deleteTestCenter/{testId}/{centerId}")
+	@DeleteMapping("/deleteTestCenter/{testId}/{centerId}")//mapping HTTP DELETE request onto deleteTestCenter
+	//handling the HTTP DELETE requests for above URL 
 	public String deleteTestCenter(@PathVariable int testId,@PathVariable int centerId)
 	{
 	   return testCenterService.deleteTestCenter(centerId,testId); 
 	}
 	
-	@PostMapping(value="/addTestCenter",consumes="application/json")
+	@PostMapping(value="/addTestCenter",consumes="application/json")//Taking Input from JSON file
+	//handling the HTTP POST requests for above URL 
 	public ResponseEntity<String> insertTestCenter(@RequestBody()TestCenter testCenter)
 	{
 		String message;
 		try
 		{
 			message="Test Inserted Successfully";
+			System.out.println(testCenter.getCenterId());
 			if(testCenterService.addTestCenter(testCenter)==null)
+			{
 				message="Test Insertion Failed";
-			return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
+			}
+			else
+			{
+				return new ResponseEntity<String>(message+" with center ID: "+testCenter.getCenterId()+" "+"and test ID: "+testCenter.getTestId(),HttpStatus.OK);
+				   
+			}
 		}
 		catch(Exception ex)
 		{
@@ -52,6 +61,7 @@ public class TestCenterController
 	}
 	
 	@GetMapping(value="/getTestCenters/{centerId}",produces="application/json")
+	//handling the HTTP GET request for above URL 
 	public ResponseEntity<Optional<List<Integer>>> getTestCenterDetails(@PathVariable int centerId)
 	{
 		Optional<List<Integer>> testCenter =  testCenterService.getTestCenter(centerId);

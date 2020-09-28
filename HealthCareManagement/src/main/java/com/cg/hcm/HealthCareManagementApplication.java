@@ -27,7 +27,7 @@ public class HealthCareManagementApplication {
     public Docket produceApi()
     {
     	return new Docket(DocumentationType.SWAGGER_2).select().
-    			apis(RequestHandlerSelectors.basePackage("com.cg.hcs")).build(); 
+    			apis(RequestHandlerSelectors.basePackage("com.cg.hcm")).build(); 
     }
 
 }

@@ -10,16 +10,18 @@ import javax.persistence.Table;
 
 @Entity
 //mapping  entity class to table in sql.
-@Table(name="center")
-//Assigning the table name
-@SequenceGenerator(name = "cenId",initialValue = 1,allocationSize = 1)
+@Table(name="diagnostic_center")
+//Specifing the table name in database
+@SequenceGenerator(name = "cenId",initialValue = 100,allocationSize = 1)
 //Defining a generator
 public class DiagnosticCenter 
 {
 	@Id
+	// Indicates the field associated with it is a primary key in DB
 	@Column(name = "center_id")
-	//Generating values of center_id
+	// Indicates the column name in the DataBase table
 	@GeneratedValue(generator = "cenId",strategy = GenerationType.SEQUENCE)
+	//Generating values of center_id
 	private Integer centerId;
 	@Column(name = "center_name")
 	private String centerName;
@@ -27,6 +29,7 @@ public class DiagnosticCenter
 	private String centerArea;
 	
 	public DiagnosticCenter() {	}
+	//default constructor
 
 	public DiagnosticCenter(Integer centerId, String centerName, String centerArea) {
 		this.centerId = centerId;

@@ -36,27 +36,40 @@ public class DiagnosticCenterController
    {
 	   try
 	   {
-	   String message="center Inserted Successfully";
-	  if(diagnosticcenterService.insertDiagnosticcenter(diagnosticcenter)==null)
-		   message="Center Insertion Failed";
-	   return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
+		   String message="center Inserted Successfully with center ID ";
+		   if(diagnosticcenterService.insertDiagnosticcenter(diagnosticcenter)==null)
+		   {
+			   message="Center Insertion Failed";
+		   		return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
+		   }
+		   else
+		   {
+			   return new ResponseEntity<String>(message+diagnosticcenter.getCenterId(),HttpStatus.OK);
+		   }
 	   }
 	   catch(Exception ex)
 	   {
 			return new ResponseEntity<String>(ex.getMessage()+" Insertion Failed",HttpStatus.BAD_REQUEST);
 			 
-	   }
+  }
 	   
-   }
+  }
    
    @DeleteMapping("/deleteDiagnosticcenter/{centerId}")
-   //Deleting a diagnostic Center form database
+   //handling the HTTP Delete requests for above URL 
    public String deleteDiagnosticcenter(@PathVariable int centerId)
    {
 	   return diagnosticcenterService.deleteDiagnosticcenter(centerId); 
    }
+   @GetMapping("/getDiagnosticcenters")
+   //handling the HTTP Get requests for above URL 
+   public List<DiagnosticCenter> getDiagnosticcenters()
+   {
+	   return diagnosticcenterService.getDiagnosticcenters();
+   }
    
    @GetMapping(value="/getDiagnosticcenter/{centerId}",produces="application/json")
+   //handling the HTTP POST requests for above URL 
    public ResponseEntity<Optional<DiagnosticCenter>> getDiagnosticcenterDetails(@PathVariable int centerId)
    {
  	  Optional<DiagnosticCenter> diagnosticcenter =  diagnosticcenterService.getDiagnosticcenter(centerId);

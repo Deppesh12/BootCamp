@@ -9,31 +9,39 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+//mapping  entity class to table in sql.
 @Table(name="test_center")
+//Specifing the table name in database
 @SequenceGenerator(name = "tcId",allocationSize = 1)
 public class TestCenter 
 {
     @Id
-    @Column(name="tc_id")
+    // Indicates the field associated with it is a primary key in DB
+    @Column(name="testcenter_Id")
+    // Indicates the column name in the DataBase table
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "tcId")
-    private int tcId;
+    //Generating values of center_id
+    private int testcenterId;
 	@Column(name="test_id")
 	private Integer testId;
 	@Column(name="center_id")
 	private Integer centerId;
+	
 	public TestCenter() {}
-	public TestCenter(int tcId,Integer testId, Integer centerId) 
+	//default constructor
+	public TestCenter(int testcenterId,Integer testId, Integer centerId) 
 	{
-		this.tcId=tcId;
+		this.testcenterId=testcenterId;
 		this.testId = testId;
 		this.centerId = centerId;
 	}
 	
-	public int getTcId() {
-		return tcId;
+	//Getters and Setters
+	public int getTestCenterId() {
+		return testcenterId;
 	}
-	public void setTcId(int tcId) {
-		this.tcId = tcId;
+	public void setTestCenterId(int testcenterId) {
+		this.testcenterId = testcenterId;
 	}
 	public Integer getTestId() {
 		return testId;

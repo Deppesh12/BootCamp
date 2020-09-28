@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.cg.hcm.dto.DiagnosticCenter;
 
-@Repository
+@Repository 
+//indicating that TestDao is a repository
 public interface DiagnosticCenterDAO extends JpaRepository<DiagnosticCenter, Integer> 
 {
 
